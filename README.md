@@ -32,15 +32,19 @@ Open the project in your code editor and install the following NuGet package:
 
 ### 3. Configure the Virtual Printer in Windows
 
-1. Go to 'Printers & scanners' in Windows Settings
-2. Click 'Add a printer or scanner' (and wait a sec)
-3. Choose 'The printer that I want isn't listed'
-4. Select 'Add a printer using a an IP address or hostname'
-5. Enter the following details:
-   - Device type: TCP/IP Device
-   - Hostname or IP address: 127.0.0.1
-   - Port name: 8888
-6. Click 'Next'
+- Run addprinter.ps1 powershell script as Admin
+
+- Manual installation
+
+1.  Go to 'Printers & scanners' in Windows Settings
+2.  Click 'Add a printer or scanner' (and wait a sec)
+3.  Choose 'The printer that I want isn't listed'
+4.  Select 'Add a printer using a an IP address or hostname'
+5.  Enter the following details:
+    - Device type: TCP/IP Device
+    - Hostname or IP address: 127.0.0.1
+    - Port name: 8888
+6.  Click 'Next'
 
 - (windows will try to detect a printer on this port config ... you will get an error, ignore it and keep the setting to General Network Card and click next)\*
 
@@ -67,7 +71,7 @@ Open the project in your code editor and install the following NuGet package:
    - Job log (job_log.txt)
    - Server log (server_log.txt)
 
-## Installation
+## Installation (Run Powershell as Admin)
 
 - Use the powershell installer script to install the service.
 - Make sure it is the same directory as the compiled exe of the service
