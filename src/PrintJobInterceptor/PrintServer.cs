@@ -7,7 +7,6 @@ public class PrintServer
     private TcpListener _listener;
     private const string _host = "127.0.0.1";
     private const int _port = 8888;
-    private const bool _KeepAlive = true;
     private const string _outputDirectory = "PrintJobs";
 
     public PrintServer()
@@ -16,14 +15,14 @@ public class PrintServer
         Directory.CreateDirectory(_outputDirectory);
     }
 
-    public async Task Start()
+    public async Task Start(CancellationToken cancellationToken)
     {
         try
         {
             _listener.Start();
             Logger.Log($"Server started. Listening on {_host}:{_port}....");
 
-            while (_KeepAlive)
+            while (!cancellationToken.IsCancellationRequested)
             {
                 Logger.Log("Waiting for print jobs...");
                 using TcpClient client = await _listener.AcceptTcpClientAsync();
@@ -32,10 +31,17 @@ public class PrintServer
                 await ProcessPrintJob(stream);
             }
         }
-        catch (System.Exception)
+        catch (OperationCanceledException)
         {
-
-            throw;
+            Logger.Log("Server stopping due to cancellation request.");
+        }
+        catch (Exception ex)
+        {
+            Logger.Log($"Error: {ex.Message}", Logger.LogLevel.Error);
+        }
+        finally
+        {
+            _listener?.Stop();
         }
     }
 
