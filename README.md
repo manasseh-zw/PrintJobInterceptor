@@ -67,6 +67,11 @@ Open the project in your code editor and install the following NuGet package:
    - Job log (job_log.txt)
    - Server log (server_log.txt)
 
+## Installation
+
+- Use the powershell installer script to install the service.
+- Make sure it is the same directory as the compiled exe of the service
+
 ## Customization
 
 - To change the output directory, modify the `PrintServer` constructor call in `Program.cs`.
